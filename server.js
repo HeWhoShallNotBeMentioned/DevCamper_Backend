@@ -1,12 +1,16 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-
-// routefile imports
-const bootcampsRouter = require('./routes/bootcamps');
+const connectDB = require('./config/db');
 
 //load env variables
 dotenv.config({ path: './config/config.env' });
+
+//MongoDB Connection
+connectDB();
+
+// routefile imports
+const bootcampsRouter = require('./routes/bootcamps');
 
 const app = express();
 
@@ -21,7 +25,14 @@ app.use('/api/v1/bootcamps', bootcampsRouter);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(
+const server = app.listen(
   PORT,
   console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`)
 );
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`);
+  //Stop server
+  server.close(() => process.exit(1));
+});
