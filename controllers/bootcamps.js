@@ -9,6 +9,7 @@ exports.getBootcamps = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Retreived all bootcamps',
+      count: bootcampsReply.length,
       data: bootcampsReply,
     });
   } catch (error) {
@@ -76,8 +77,22 @@ exports.updateBootcamp = async (req, res, next) => {
 // @desc    Delete single bootcamp
 // @route   DELETE /api/v1/bootcamps/:id
 // @access  Private
-exports.deleteBootcamp = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, message: `Delete bootcamp ${req.params.id}` });
+exports.deleteBootcamp = async (req, res, next) => {
+  try {
+    const numb = req.params.id;
+    console.log('numb', numb);
+    const bootcampReply = await Bootcamp.findByIdAndDelete(numb);
+
+    if (!bootcampReply) {
+      throw new Error(`There is no bootcamp with id ${numb}.`);
+    }
+
+    res.status(200).json({
+      success: true,
+      data: bootcampReply,
+      message: `Successfully deleted bootcamp with ID: ${numb}`,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
 };
