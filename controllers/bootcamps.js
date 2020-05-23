@@ -52,10 +52,25 @@ exports.createBootcamp = async (req, res, next) => {
 // @desc    Update single bootcamp
 // @route   PUT /api/v1/bootcamps/:id
 // @access  Private
-exports.updateBootcamp = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, message: `Update bootcamp ${req.params.id}` });
+exports.updateBootcamp = async (req, res, next) => {
+  try {
+    const numb = req.params.id;
+    const bootcampReply = await Bootcamp.findByIdAndUpdate(numb, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!bootcampReply) {
+      throw new Error(`There is no bootcamp with id ${numb}.`);
+    }
+    res.status(200).json({
+      success: true,
+      data: bootcampReply,
+      message: `Updated bootcamp ${numb}`,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
 };
 
 // @desc    Delete single bootcamp
