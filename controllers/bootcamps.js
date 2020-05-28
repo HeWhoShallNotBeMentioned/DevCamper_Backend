@@ -13,7 +13,7 @@ exports.getBootcamps = async (req, res, next) => {
       data: bootcampsReply,
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -34,7 +34,8 @@ exports.getBootcamp = async (req, res, next) => {
       data: bootcampReply,
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    //res.status(400).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
