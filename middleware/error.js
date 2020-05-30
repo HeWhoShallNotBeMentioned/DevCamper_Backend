@@ -6,10 +6,11 @@ const errorHandler = (err, req, res, next) => {
   // making sure enumerable properties are set.
   error.message = err.message;
   error.stack = err.stack;
-  // log errors to console in color red
-  console.log(error.stack.red);
 
-  //error.message = err.message;
+  // log errors to console in color red
+  console.log(err);
+
+  error.message = err.message;
 
   // Show the Mongoose error name in the console
   console.log('error.name...', error.name);
@@ -18,6 +19,12 @@ const errorHandler = (err, req, res, next) => {
   if (error.name === 'CastError') {
     const message = `Resource not found with id of ${error.value}`;
     error = new ErrorResponse(message, 404);
+  }
+
+  // Mongoose duplicate key
+  if (err.code === 11000) {
+    const message = `Duplicate field value entered.`;
+    error = new ErrorResponse(message, 409);
   }
 
   res.status(error.statusCode || 500).json({
