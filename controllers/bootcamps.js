@@ -39,9 +39,7 @@ exports.getBootcamp = async (req, res, next) => {
     });
   } catch (error) {
     //for ids that are not properly formatted
-    next(
-      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
-    );
+    next(error);
   }
 };
 
@@ -53,7 +51,7 @@ exports.createBootcamp = async (req, res, next) => {
     const bootcampReply = await Bootcamp.create(req.body);
     res.status(201).json({ success: true, data: bootcampReply });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -69,7 +67,9 @@ exports.updateBootcamp = async (req, res, next) => {
     });
 
     if (!bootcampReply) {
-      throw new Error(`There is no bootcamp with id ${numb}.`);
+      return next(
+        new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+      );
     }
     res.status(200).json({
       success: true,
@@ -77,7 +77,7 @@ exports.updateBootcamp = async (req, res, next) => {
       message: `Updated bootcamp ${numb}`,
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -91,7 +91,9 @@ exports.deleteBootcamp = async (req, res, next) => {
     const bootcampReply = await Bootcamp.findByIdAndDelete(numb);
 
     if (!bootcampReply) {
-      throw new Error(`There is no bootcamp with id ${numb}.`);
+      return next(
+        new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+      );
     }
 
     res.status(200).json({
@@ -100,6 +102,6 @@ exports.deleteBootcamp = async (req, res, next) => {
       message: `Successfully deleted bootcamp with ID: ${numb}`,
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    next(error);
   }
 };
