@@ -36,13 +36,14 @@
 ## Other Info
 
 - Deployment Gist - https://gist.github.com/bradtraversy/cd90d1ed3c462fe3bddd11bf8953a896
-- Digital Ocean Website ($10 Referral Link) - https://m.do.co/c/5424d440c63a
+- Digital Ocean Website (\$10 Referral Link) - https://m.do.co/c/5424d440c63a
 - SSH Key Setup - https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
 - HTTP Status Codes - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 - HTTP Request Methods - https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 - JWT - https://jwt.io/
 - Security Packages Article - https://hackernoon.com/express-js-important-npm-packages-related-to-security-2393466e18d5
 - NoSQL Injection Article - https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html
+- Async DRY Try/Catch - https://web.archive.org/web/20191005035733/http://www.acuriousanimal.com/2018/02/15/express-async-middleware.html
 
 ## Express Docs
 
@@ -64,4 +65,3 @@
 - Relationships & Populate - https://mongoosejs.com/docs/populate.html
 - Virtuals - https://mongoosejs.com/docs/guide.html#virtuals
 - Statics - https://mongoosejs.com/docs/guide.html#statics
-
