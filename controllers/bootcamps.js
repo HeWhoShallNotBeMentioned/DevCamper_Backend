@@ -7,14 +7,40 @@ const Bootcamp = require('../models/Bootcamp');
 // @route   GET /api/v1/bootcamps
 // @access  Public
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-  console.log('req.query-----  ', req.query);
-  let qp = JSON.stringify(req.query);
+  let query;
+
+  // Copy req.query
+  const reqQuery = { ...req.query };
+
+  // Fields to exclude
+  const removeFields = ['select'];
+
+  // Loop over removeFields and delete them from reqQuery
+  removeFields.forEach(param => delete reqQuery[param]);
+
+  console.log(reqQuery);
+
+  // Create query string
+  let qp = JSON.stringify(reqQuery);
+
+  // Create operators ($gt, $gte, $lt, $lte, $in)
   qp = qp.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
-  //console.log('qp-------   ', qp);
+  // Convert string back to JSON
+  let queryStr = JSON.parse(qp);
 
-  let query = JSON.parse(qp);
-  const bootcampsReply = await Bootcamp.find(query);
+  query = Bootcamp.find(queryStr);
+
+  // Select Fields
+  if (req.query.select) {
+    const fields = req.query.select.split(',').join(' ');
+    console.log(fields);
+    query.select(fields);
+  }
+
+  // Database search based on our query params
+  const bootcampsReply = await query;
+
   res.status(200).json({
     success: true,
     message: 'Retreived all bootcamps',
