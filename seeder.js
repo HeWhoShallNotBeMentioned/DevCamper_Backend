@@ -31,7 +31,7 @@ const courses = JSON.parse(
 const importData = async () => {
   try {
     const replyNotUsed = await Bootcamp.create(bootcamps);
-    const replyNotUsed2 = await Course.create(courses);
+    //const replyNotUsed2 = await Course.create(courses);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
