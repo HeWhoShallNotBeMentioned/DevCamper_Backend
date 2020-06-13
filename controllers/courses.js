@@ -92,7 +92,28 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    message: 'Course Created.',
+    message: 'Course Updated.',
     data: course,
+  });
+});
+
+// @desc    Delete a single course
+// @route   DELETE /api/v1/bootcamps/:id
+// @access  Private
+exports.deleteCourse = asyncHandler(async (req, res, next) => {
+  const courseId = req.params.id;
+
+  const course = await Course.findById(courseId);
+
+  if (!course) {
+    return next(new ErrorResponse(`No course with id:   ${courseId}.`, 404));
+  }
+
+  const courseDeleted = await course.remove();
+
+  res.status(201).json({
+    success: true,
+    message: 'Course  Deleted.',
+    data: courseDeleted,
   });
 });
