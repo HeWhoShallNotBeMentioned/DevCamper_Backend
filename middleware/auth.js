@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtiken');
 const asyncHandler = require('./async');
-const ErrorRespnse = require('../utils/errorResponse');
+const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 
