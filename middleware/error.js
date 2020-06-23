@@ -8,12 +8,12 @@ const errorHandler = (err, req, res, next) => {
   error.stack = err.stack;
 
   // log errors to console in color red
-  console.log(err);
+  //console.error(err);
 
   error.message = err.message;
 
   // Show the Mongoose error name in the console
-  console.log('error.name...', error.name);
+  //console.log('error.name...', error.name);
 
   // Mongoose bad ObjectId
   if (error.name === 'CastError') {
