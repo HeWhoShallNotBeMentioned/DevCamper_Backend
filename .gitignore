@@ -1,3 +1,4 @@
 node_modules/
 *.env
 .DS_Store
+devcamper_project_resources/devcamper_theme/
