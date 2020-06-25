@@ -108,12 +108,25 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // Make sure user is owner
+  if (
+    bootcampReply.user.toString() !== req.user.id &&
+    req.user.role !== 'admin'
+  ) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} does not have permission to delete Bootcamp ${req.params.id}`,
+        401
+      )
+    );
+  }
+
   bootcampReply.remove();
 
   res.status(200).json({
     success: true,
-    data: bootcampReply,
     message: `Successfully deleted bootcamp with ID: ${numb}`,
+    data: bootcampReply,
   });
 });
 
