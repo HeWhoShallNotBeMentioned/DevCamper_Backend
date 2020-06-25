@@ -61,20 +61,36 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   const numb = req.params.id;
-  const bootcampReply = await Bootcamp.findByIdAndUpdate(numb, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let bootcampReply = await Bootcamp.findById(numb);
 
   if (!bootcampReply) {
     return next(
       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
+
+  // Make sure user is owner
+  if (
+    bootcampReply.user.toString() !== req.user.id &&
+    req.user.role !== 'admin'
+  ) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} does not have permission to edit Bootcamp ${req.params.id}`,
+        401
+      )
+    );
+  }
+
+  bootcampReply = await Bootcamp.findByIdAndUpdate(numb, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
   res.status(200).json({
     success: true,
-    data: bootcampReply,
     message: `Updated bootcamp ${numb}`,
+    data: bootcampReply,
   });
 });
 
