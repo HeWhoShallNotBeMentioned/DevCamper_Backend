@@ -90,6 +90,16 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`No course with id:   ${courseId}.`, 404));
   }
 
+  // Make sure user is course owner
+  if (course.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} does not have permission to update  course ${req.params.id}`,
+        401
+      )
+    );
+  }
+
   course = await Course.findByIdAndUpdate(courseId, req.body, {
     new: true,
     runValidators: true,
