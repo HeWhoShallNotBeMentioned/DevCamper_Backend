@@ -74,11 +74,11 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
   // Check current password
-  if (!(await user.matchPassword(req.body.password))) {
+  if (!(await user.matchPassword(req.body.currentPassword))) {
     return next(new ErrorResponse('Password is incorrect.', 401));
   }
 
-  user.password = req.body.password;
+  user.password = req.body.newPassword;
   const userResponseNotUseed = await user.save();
 
   sendTokenResponse(user, 200, res);
