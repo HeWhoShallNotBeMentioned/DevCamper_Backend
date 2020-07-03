@@ -10,7 +10,7 @@ const Bootcamp = require('../models/Bootcamp');
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
   res
     .status(200)
-    .json({ ...res.advancedResults, message: 'Retrived all bootcamps.' });
+    .json({ ...res.advancedResults, message: 'Retrieved all bootcamps.' });
 });
 
 // @desc    Get single bootcamp
