@@ -75,7 +75,7 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: `Updated user ${req.params.id}.`,
+    message: `Deleted user ${req.params.id}.`,
     data: {},
   });
 });
