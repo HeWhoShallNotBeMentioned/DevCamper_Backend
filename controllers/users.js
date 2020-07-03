@@ -48,7 +48,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Update user
-// @route   PuT /api/v1/auth/users/:id
+// @route   PUT /api/v1/auth/users/:id
 // @access  Private/Admin
 exports.updateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
@@ -62,8 +62,20 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: `Updatea user ${req.params.id}.`,
+    message: `Updated user ${req.params.id}.`,
     data: user,
   });
 });
-d;
+
+// @desc    Delete user
+// @route   DELETE /api/v1/auth/users/:id
+// @access  Private/Admin
+exports.deleteUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  res.status(200).json({
+    success: true,
+    message: `Updated user ${req.params.id}.`,
+    data: {},
+  });
+});
