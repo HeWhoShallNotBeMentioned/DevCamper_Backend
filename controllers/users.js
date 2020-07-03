@@ -46,3 +46,24 @@ exports.createUser = asyncHandler(async (req, res, next) => {
     data: user,
   });
 });
+
+// @desc    Update user
+// @route   PuT /api/v1/auth/users/:id
+// @access  Private/Admin
+exports.updateUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    return next(new ErrorResponse(`User not updated,`, 400));
+  }
+
+  res.status(200).json({
+    success: true,
+    message: `Updatea user ${req.params.id}.`,
+    data: user,
+  });
+});
+d;
