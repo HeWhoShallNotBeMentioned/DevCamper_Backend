@@ -136,7 +136,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
 
   const courseDeleted = await course.remove();
 
-  res.status(201).json({
+  res.status(204).json({
     success: true,
     message: 'Course  Deleted.',
     data: courseDeleted,
