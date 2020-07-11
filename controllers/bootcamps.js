@@ -174,7 +174,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   if (file.size > process.env.MAX_FILE_UPLOAD) {
     return next(
       new ErrorResponse(
-        'Please upload an image file less than ${process.env.MAX_FILE_UPLOAD} bytes.',
+        `Please upload an image file less than ${process.env.MAX_FILE_UPLOAD} bytes.`,
         400
       )
     );
