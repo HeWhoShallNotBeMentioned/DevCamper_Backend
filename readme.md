@@ -36,4 +36,4 @@ _{Determine the license under which this application can be used. See below for 
 
 Copyright (c) 2016 **_{List of contributors or company name}_**
 
-![DevCamper homepage ](./DevCamper.htm 'DevaCamper Home')
+![DevCamper homepage ](DevCamper.htm 'DevCamper Home')
