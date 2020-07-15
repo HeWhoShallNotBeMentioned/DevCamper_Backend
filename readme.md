@@ -36,5 +36,5 @@ _{Determine the license under which this application can be used. See below for 
 
 Copyright (c) 2016 **_{List of contributors or company name}_**
 
-![DevCamper homepage](DevCamper.pdf)
+![DevCamper homepage](DevCamper.jpg)
 ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
