@@ -149,6 +149,10 @@ node seeder -d
 
 node seeder -i
 
+##### Format json API data pulled from Postman to web data.
+
+docgen build -i dc.postman_collection.json -o index.html
+
 ## Known Bugs
 
 _{None that I am aware of. This is only a backend api. There currently is no associated frontend. }_
@@ -159,7 +163,7 @@ _{cunderwoodmn [at] gmail {dot} com}_
 
 ## Technologies Used
 
-_{MongoDB, Mongoose, Atlas, bcryptjs, colors, cookie-parser, cors, dotenv, express, express-fileupload, express-mongo-sanitize, express-rate-limit, helmet, hpp, jsonwebtoken, morgan, node-geocoder, nodemailer, slugify, xss-clean, nodemon Node.js, npm}_
+_{MongoDB, Mongoose, Atlas, Postman,bcryptjs, colors, cookie-parser, cors, dotenv, express, express-fileupload, express-mongo-sanitize, express-rate-limit, helmet, hpp, jsonwebtoken, morgan, node-geocoder, nodemailer, slugify, xss-clean, nodemon, docgen, Node.js, npm}_
 
 ### License
 
